@@ -1,14 +1,21 @@
 import React, { FC } from 'react'
-import { View, StyleSheet, Text } from 'react-native'
-
+import { View, StyleSheet, Text, Button } from 'react-native'
+import { NavigationStackProp } from 'react-navigation-stack'
+import { CategoryMeal } from '@constants/navigations'
 interface ICategoriesScreenProps {
-  prop?: any
+  navigation: NavigationStackProp
 }
 
-export const CategoriesScreen: FC<ICategoriesScreenProps> = ({ children }) => {
+export const CategoriesScreen: FC<ICategoriesScreenProps> = ({
+  navigation,
+}) => {
   return (
     <View style={styles.screen}>
       <Text>Categories Screen</Text>
+      <Button
+        title="GoTo CategoryMealScreen"
+        onPress={() => navigation.navigate({ routeName: CategoryMeal })}
+      />
     </View>
   )
 }

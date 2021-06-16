@@ -5,10 +5,10 @@ interface ICategoryMealProps {
   prop?: any
 }
 
-export const CategoryMeal: FC<ICategoryMealProps> = ({ children }) => {
+export const CategoryMealScreen: FC<ICategoryMealProps> = ({ children }) => {
   return <View></View>
 }
 
 const styles = StyleSheet.create({})
 
-export default CategoryMeal
+export default CategoryMealScreen
