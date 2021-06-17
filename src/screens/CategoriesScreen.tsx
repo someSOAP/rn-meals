@@ -1,30 +1,65 @@
 import React, { FC } from 'react'
-import { View, StyleSheet, Text, Button } from 'react-native'
-import { NavigationStackProp } from 'react-navigation-stack'
+import {
+  StyleSheet,
+  Text,
+  FlatList,
+  ListRenderItemInfo,
+  TouchableOpacity,
+} from 'react-native'
+import {
+  NavigationStackProp,
+  NavigationStackScreenComponent,
+} from 'react-navigation-stack'
+import Category from '@/models/Category'
 import { CategoryMeal } from '@constants/navigations'
+import { CATEGORIES } from '@/data/dummy-data'
+import { PRIMARY } from '@color'
 interface ICategoriesScreenProps {
   navigation: NavigationStackProp
 }
 
-export const CategoriesScreen: FC<ICategoriesScreenProps> = ({
-  navigation,
-}) => {
+type CategoriesScreenType =
+  NavigationStackScreenComponent<ICategoriesScreenProps>
+
+export const CategoriesScreen: CategoriesScreenType = ({ navigation }) => {
+  const renderGridItem = (itemData: ListRenderItemInfo<Category>) => {
+    return (
+      <TouchableOpacity
+        style={styles.gridItem}
+        onPress={() =>
+          navigation.navigate({
+            routeName: CategoryMeal,
+            params: {
+              categoryId: itemData.item.id,
+            },
+          })
+        }
+      >
+        <Text>{itemData.item.title}</Text>
+      </TouchableOpacity>
+    )
+  }
+
   return (
-    <View style={styles.screen}>
-      <Text>Categories Screen</Text>
-      <Button
-        title="GoTo CategoryMealScreen"
-        onPress={() => navigation.navigate({ routeName: CategoryMeal })}
-      />
-    </View>
+    <FlatList numColumns={2} data={CATEGORIES} renderItem={renderGridItem} />
   )
 }
 
+CategoriesScreen.navigationOptions = {
+  headerTitle: 'Meal Categories',
+  headerStyle: {
+    backgroundColor: PRIMARY,
+  },
+  headerTintColor: 'white',
+}
+
 const styles = StyleSheet.create({
-  screen: {
+  gridItem: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    margin: 15,
+    height: 150,
+    borderWidth: 1,
+    borderColor: 'black',
   },
 })
 

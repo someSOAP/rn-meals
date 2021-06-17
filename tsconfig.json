@@ -4,13 +4,14 @@
     "strict": true,
     "baseUrl": ".",
     "paths": {
-      "@": ["src/*"],
+      "@/*": ["src/*"],
+      "@src/*": ["src/*"],
       "@components/*": ["src/components/*"],
       "@screens/*": ["src/screens/*"],
       "@constants/*": ["src/constants/*"],
       "@utils/*": ["src/utils/*"],
       "@color": ["src/constants/color.ts"],
-      "@navigator": ["src/navigator/*"]
+      "@navigator/*": ["src/navigator/*"]
     }
   }
 }
