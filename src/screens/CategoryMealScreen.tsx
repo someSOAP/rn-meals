@@ -1,21 +1,37 @@
 import React from 'react'
-import { View, StyleSheet, Button, Text } from 'react-native'
-import { MealDetail } from '@constants/navigations'
+import {
+  View,
+  StyleSheet,
+  Text,
+  FlatList,
+  ListRenderItemInfo,
+} from 'react-native'
 import { NavigationStackScreenComponent } from 'react-navigation-stack'
 import Category from '@/models/Category'
 
+import { MEALS } from '@/data/dummy-data'
+import Meal from '@/models/Meal'
+
 type CategoryMealScreenType = NavigationStackScreenComponent
+
+const renderMeals = (data: ListRenderItemInfo<Meal>) => {
+  return (
+    <View>
+      <Text>{data.item.title}</Text>
+    </View>
+  )
+}
 
 export const CategoryMealScreen: CategoryMealScreenType = ({ navigation }) => {
   const selectedCategory: Category | undefined = navigation.getParam('category')
 
+  const categoryMeals = MEALS.filter((meal) =>
+    meal.categoryIds.includes(selectedCategory?.id ?? '')
+  )
+
   return (
     <View>
-      <Text>{selectedCategory?.title ?? 'Категория'}</Text>
-      <Button
-        title="GoTo CategoryMealScreen"
-        onPress={() => navigation.navigate({ routeName: MealDetail })}
-      />
+      <FlatList data={categoryMeals} renderItem={renderMeals} />
     </View>
   )
 }

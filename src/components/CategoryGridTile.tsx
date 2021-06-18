@@ -12,13 +12,13 @@ export const CategoryGridTile: FC<ICategoryGridTileProps> = ({
   category,
 }) => {
   return (
-    <View style={{ ...styles.gridItem, backgroundColor: category.color }}>
-      <TouchableNativeFeedback onPress={onPress}>
+    <TouchableNativeFeedback onPress={onPress}>
+      <View style={{ ...styles.gridItem, backgroundColor: category.color }}>
         <Text numberOfLines={2} style={styles.textStyle}>
           {category.title}
         </Text>
-      </TouchableNativeFeedback>
-    </View>
+      </View>
+    </TouchableNativeFeedback>
   )
 }
 
