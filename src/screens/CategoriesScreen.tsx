@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React from 'react'
 import {
   StyleSheet,
   Text,
@@ -6,20 +6,12 @@ import {
   ListRenderItemInfo,
   TouchableOpacity,
 } from 'react-native'
-import {
-  NavigationStackProp,
-  NavigationStackScreenComponent,
-} from 'react-navigation-stack'
+import { NavigationStackScreenComponent } from 'react-navigation-stack'
 import Category from '@/models/Category'
 import { CategoryMeal } from '@constants/navigations'
 import { CATEGORIES } from '@/data/dummy-data'
-import { PRIMARY } from '@color'
-interface ICategoriesScreenProps {
-  navigation: NavigationStackProp
-}
 
-type CategoriesScreenType =
-  NavigationStackScreenComponent<ICategoriesScreenProps>
+type CategoriesScreenType = NavigationStackScreenComponent
 
 export const CategoriesScreen: CategoriesScreenType = ({ navigation }) => {
   const renderGridItem = (itemData: ListRenderItemInfo<Category>) => {
@@ -31,6 +23,7 @@ export const CategoriesScreen: CategoriesScreenType = ({ navigation }) => {
             routeName: CategoryMeal,
             params: {
               categoryId: itemData.item.id,
+              category: itemData.item,
             },
           })
         }
@@ -47,10 +40,6 @@ export const CategoriesScreen: CategoriesScreenType = ({ navigation }) => {
 
 CategoriesScreen.navigationOptions = {
   headerTitle: 'Meal Categories',
-  headerStyle: {
-    backgroundColor: PRIMARY,
-  },
-  headerTintColor: 'white',
 }
 
 const styles = StyleSheet.create({

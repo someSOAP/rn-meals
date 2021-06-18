@@ -1,23 +1,31 @@
-import React, { FC } from 'react'
-import { View, StyleSheet, Button } from 'react-native'
+import React from 'react'
+import { View, StyleSheet, Button, Text } from 'react-native'
 import { MealDetail } from '@constants/navigations'
-import { NavigationStackProp } from 'react-navigation-stack'
+import { NavigationStackScreenComponent } from 'react-navigation-stack'
+import Category from '@/models/Category'
 
-interface ICategoryMealProps {
-  navigation: NavigationStackProp
-}
+type CategoryMealScreenType = NavigationStackScreenComponent
 
-export const CategoryMealScreen: FC<ICategoryMealProps> = ({
-  navigation,
-}) => {
+export const CategoryMealScreen: CategoryMealScreenType = ({ navigation }) => {
+  const selectedCategory: Category | undefined = navigation.getParam('category')
+
   return (
     <View>
+      <Text>{selectedCategory?.title ?? 'Категория'}</Text>
       <Button
         title="GoTo CategoryMealScreen"
         onPress={() => navigation.navigate({ routeName: MealDetail })}
       />
     </View>
   )
+}
+
+CategoryMealScreen.navigationOptions = ({ navigation }) => {
+  const selectedCategory: Category | undefined = navigation.getParam('category')
+
+  return {
+    headerTitle: selectedCategory?.title ?? 'Категория',
+  }
 }
 
 const styles = StyleSheet.create({})

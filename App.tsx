@@ -2,6 +2,7 @@ import React, { FC, useState } from 'react'
 import { StyleSheet } from 'react-native'
 import AppLoading from 'expo-app-loading'
 import * as Font from 'expo-font'
+import { enableScreens } from 'react-native-screens'
 import { OPEN_SANS, OPEN_SANS_BOLD } from '@constants/fonts'
 import MealsNavigator from './src/navigator'
 
@@ -14,6 +15,8 @@ const fetchFonts = () => {
 
 const App: FC = () => {
   const [fontLoaded, setFontLoaded] = useState(false)
+
+  enableScreens()
 
   if (!fontLoaded) {
     return (
