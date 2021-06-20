@@ -1,29 +1,39 @@
-import React, { FC } from 'react'
-import { View, StyleSheet, Button } from 'react-native'
-import { NavigationStackProp } from 'react-navigation-stack'
-import { MealDetail, Categories } from '@constants/navigations'
+import React from 'react'
+import { View, StyleSheet, Text } from 'react-native'
+import { NavigationStackScreenComponent } from 'react-navigation-stack'
+import { HeaderButtons, Item } from 'react-navigation-header-buttons'
+import { HeaderButton } from '@components/HeaderButton'
+import Meal from '@/models/Meal'
 
-interface IMealDetailsScreenProps {
-  navigation: NavigationStackProp
-}
-
-export const MealDetailsScreen: FC<IMealDetailsScreenProps> = ({
+export const MealDetailsScreen: NavigationStackScreenComponent = ({
   navigation,
 }) => {
+  const selectedMeal: Meal | undefined = navigation.getParam('meal')
+
   return (
     <View>
-      <Button
-        onPress={() => navigation.push(MealDetail)}
-        title="GOTO another Meal detail"
-      />
-      <Button title="BACK" onPress={() => navigation.pop()} />
-      <Button title="TO ROOT" onPress={() => navigation.popToTop()} />
-      <Button
-        title="REPLACE ROOT"
-        onPress={() => navigation.replace(Categories)}
-      />
+      <Text>{selectedMeal?.title}</Text>
     </View>
   )
+}
+
+const HeaderRight = () => (
+  <HeaderButtons HeaderButtonComponent={HeaderButton}>
+    <Item
+      title="Favourite"
+      iconName="ios-star"
+      onPress={() => console.log('Mark as Fav')}
+    />
+  </HeaderButtons>
+)
+
+MealDetailsScreen.navigationOptions = ({ navigation }) => {
+  const selectedMeal: Meal | undefined = navigation.getParam('meal')
+
+  return {
+    headerTitle: selectedMeal?.title ?? 'Блюдо',
+    headerRight: HeaderRight,
+  }
 }
 
 const styles = StyleSheet.create({})
