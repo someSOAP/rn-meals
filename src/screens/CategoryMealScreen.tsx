@@ -7,6 +7,7 @@ import {
   ListRenderItemInfo,
 } from 'react-native'
 import { NavigationStackScreenComponent } from 'react-navigation-stack'
+import { MealItem } from '@components/MealItem'
 import Category from '@/models/Category'
 
 import { MEALS } from '@/data/dummy-data'
@@ -15,11 +16,7 @@ import Meal from '@/models/Meal'
 type CategoryMealScreenType = NavigationStackScreenComponent
 
 const renderMeals = (data: ListRenderItemInfo<Meal>) => {
-  return (
-    <View>
-      <Text>{data.item.title}</Text>
-    </View>
-  )
+  return <MealItem meal={data.item} onPress={() => void 0} />
 }
 
 export const CategoryMealScreen: CategoryMealScreenType = ({ navigation }) => {

@@ -1,7 +1,14 @@
 import React, { FC } from 'react'
-import { Text, StyleSheet, TouchableNativeFeedback, View } from 'react-native'
+import {
+  Text,
+  StyleSheet,
+  TouchableNativeFeedback,
+  View,
+  ImageBackground,
+} from 'react-native'
 import Category from '@/models/Category'
-import { OPEN_SANS_BOLD } from '@constants/fonts'
+import { mixins } from '@/styles/mixins'
+
 interface ICategoryGridTileProps {
   category: Category
   onPress: () => void
@@ -14,9 +21,14 @@ export const CategoryGridTile: FC<ICategoryGridTileProps> = ({
   return (
     <TouchableNativeFeedback onPress={onPress}>
       <View style={{ ...styles.gridItem, backgroundColor: category.color }}>
-        <Text numberOfLines={2} style={styles.textStyle}>
-          {category.title}
-        </Text>
+        <ImageBackground
+          style={styles.image}
+          source={{ uri: category.imageURL }}
+        >
+          <Text numberOfLines={2} style={styles.textStyle}>
+            {category.title}
+          </Text>
+        </ImageBackground>
       </View>
     </TouchableNativeFeedback>
   )
@@ -33,15 +45,11 @@ const styles = StyleSheet.create({
     alignItems: 'flex-end',
     paddingVertical: 15,
   },
-  textStyle: {
-    alignSelf: 'stretch',
-    paddingHorizontal: 15,
-    backgroundColor: 'rgba(0, 0, 0, 0.35)',
-    textAlign: 'right',
-    fontFamily: OPEN_SANS_BOLD,
-    fontSize: 17,
-    color: 'white',
+  image: {
+    width: '100%',
+    height: '100%',
   },
+  textStyle: mixins.title,
 })
 
 export default CategoryGridTile
