@@ -3,7 +3,7 @@ import { View, StyleSheet, FlatList, ListRenderItemInfo } from 'react-native'
 import { NavigationStackScreenComponent } from 'react-navigation-stack'
 import { MealItem } from '@components/MealItem'
 import Category from '@/models/Category'
-import { MealDetail } from '@constants/navigations'
+import { MEAL_DETAIL } from '@constants/navigations'
 import { MEALS } from '@/data/dummy-data'
 import Meal from '@/models/Meal'
 
@@ -22,7 +22,7 @@ export const CategoryMealScreen: CategoryMealScreenType = ({ navigation }) => {
         meal={data.item}
         onPress={() =>
           navigation.navigate({
-            routeName: MealDetail,
+            routeName: MEAL_DETAIL,
             params: { meal: data.item },
           })
         }

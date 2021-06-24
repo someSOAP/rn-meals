@@ -1,12 +1,16 @@
 import React, { FC } from 'react'
-import { View, StyleSheet } from 'react-native'
+import { View, StyleSheet, Text } from 'react-native'
 
 interface IFavouriteScreenProps {
   prop?: any
 }
 
 export const FavouriteScreen: FC<IFavouriteScreenProps> = ({ children }) => {
-  return <View></View>
+  return (
+    <View>
+      <Text>FAV</Text>
+    </View>
+  )
 }
 
 const styles = StyleSheet.create({})

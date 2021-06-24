@@ -4,7 +4,7 @@ import { NavigationStackScreenComponent } from 'react-navigation-stack'
 import Category from '@/models/Category'
 import CategoryGridTile from '@components/CategoryGridTile'
 import { CATEGORIES } from '@/data/dummy-data'
-import { CategoryMeal } from '@constants/navigations'
+import { CATEGORY_MEAL } from '@constants/navigations'
 
 type CategoriesScreenType = NavigationStackScreenComponent
 
@@ -15,7 +15,7 @@ export const CategoriesScreen: CategoriesScreenType = ({ navigation }) => {
         category={itemData.item}
         onPress={() =>
           navigation.navigate({
-            routeName: CategoryMeal,
+            routeName: CATEGORY_MEAL,
             params: {
               category: itemData.item,
             },
