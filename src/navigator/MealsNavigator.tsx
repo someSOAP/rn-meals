@@ -14,8 +14,11 @@ import {
   CATEGORIES,
   MEALS,
   FAVOURITES,
+  FILTERS,
 } from '@constants/navigations'
 import { PRIMARY, SECONDARY } from '@color'
+import { createDrawerNavigator } from 'react-navigation-drawer'
+import FiltersScreen from '@screens/FiltersScreen'
 
 const MealsNavigator = createStackNavigator(
   {
@@ -82,4 +85,20 @@ const MealsFavTabNavigator = createMaterialBottomTabNavigator(
   }
 )
 
-export default createAppContainer(MealsFavTabNavigator)
+const FiltersNavigator = createStackNavigator(
+  {
+    [FILTERS]: FiltersScreen,
+  },
+  {
+    defaultNavigationOptions: {
+      headerTitle: 'Filter Meals',
+    },
+  }
+)
+
+const MainNavigator = createDrawerNavigator({
+  [FAVOURITES]: MealsFavTabNavigator,
+  [FILTERS]: FiltersNavigator,
+})
+
+export default createAppContainer(MainNavigator)

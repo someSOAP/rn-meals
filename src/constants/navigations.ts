@@ -4,3 +4,4 @@ export const MEAL_DETAIL = 'MealDetail'
 
 export const MEALS = 'MEALS'
 export const FAVOURITES = 'FAVOURITES'
+export const FILTERS = 'FILTERS'
