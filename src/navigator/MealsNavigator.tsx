@@ -33,6 +33,21 @@ const MealsNavigator = createStackNavigator(
   }
 )
 
+const FavNavigator = createStackNavigator(
+  {
+    [FAVOURITES]: FavouriteScreen,
+    [MEAL_DETAIL]: MealDetailsScreen,
+  },
+  {
+    defaultNavigationOptions: {
+      headerStyle: {
+        backgroundColor: PRIMARY,
+      },
+      headerTintColor: 'white',
+    },
+  }
+)
+
 const MealsIcon: FC<any> = ({ tintColor }) => {
   return <Ionicons name="ios-restaurant" size={25} color={tintColor} />
 }
@@ -50,7 +65,7 @@ const MealsFavTabNavigator = createMaterialBottomTabNavigator(
       screen: MealsNavigator,
     },
     [FAVOURITES]: {
-      screen: FavouriteScreen,
+      screen: FavNavigator,
       navigationOptions: {
         tabBarIcon: FavIcon,
       },
@@ -59,7 +74,7 @@ const MealsFavTabNavigator = createMaterialBottomTabNavigator(
   {
     initialRouteName: MEALS,
     activeColor: PRIMARY,
-    inactiveColor: 'slate-gray',
+    inactiveColor: 'gray',
     shifting: true,
     barStyle: {
       backgroundColor: 'white',

@@ -1,7 +1,8 @@
 import React from 'react'
-import { View, StyleSheet, FlatList, ListRenderItemInfo } from 'react-native'
+import { StyleSheet } from 'react-native'
 import { NavigationStackScreenComponent } from 'react-navigation-stack'
-import { MealItem } from '@components/MealItem'
+import { MealList } from '@components/MealList'
+
 import Category from '@/models/Category'
 import { MEAL_DETAIL } from '@constants/navigations'
 import { MEALS } from '@/data/dummy-data'
@@ -16,25 +17,13 @@ export const CategoryMealScreen: CategoryMealScreenType = ({ navigation }) => {
     meal.categoryIds.includes(selectedCategory?.id ?? '')
   )
 
-  const renderMeals = (data: ListRenderItemInfo<Meal>) => {
-    return (
-      <MealItem
-        meal={data.item}
-        onPress={() =>
-          navigation.navigate({
-            routeName: MEAL_DETAIL,
-            params: { meal: data.item },
-          })
-        }
-      />
-    )
-  }
+  const onPress = (meal: Meal) =>
+    navigation.navigate({
+      routeName: MEAL_DETAIL,
+      params: { meal },
+    })
 
-  return (
-    <View>
-      <FlatList data={categoryMeals} renderItem={renderMeals} />
-    </View>
-  )
+  return <MealList meals={categoryMeals} onPress={onPress} />
 }
 
 CategoryMealScreen.navigationOptions = ({ navigation }) => {
