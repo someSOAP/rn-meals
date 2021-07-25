@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, StyleSheet, Text } from 'react-native'
+import { View, StyleSheet, Text, ScrollView, Image } from 'react-native'
 import { NavigationStackScreenComponent } from 'react-navigation-stack'
 import { HeaderButtons, Item } from 'react-navigation-header-buttons'
 import { HeaderButton } from '@components/HeaderButton'
@@ -10,10 +10,23 @@ export const MealDetailsScreen: NavigationStackScreenComponent = ({
 }) => {
   const selectedMeal: Meal | undefined = navigation.getParam('meal')
 
+  if (!selectedMeal) {
+    return (
+      <View>
+        <Text>NO DATA</Text>
+      </View>
+    )
+  }
+
   return (
-    <View>
-      <Text>{selectedMeal?.title}</Text>
-    </View>
+    <ScrollView>
+      <Image source={{ uri: selectedMeal.imageUrl }} />
+      <View>
+        <Text>Name: {selectedMeal.title}</Text>
+        <Text>Ingridients: {selectedMeal.ingridients}</Text>
+        <Text>Afforadbility: {selectedMeal.affordability}</Text>
+      </View>
+    </ScrollView>
   )
 }
 
